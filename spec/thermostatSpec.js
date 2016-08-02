@@ -23,4 +23,23 @@ describe("Thermostat", function() {
     }
     expect(function(){ thermostat.down(); }).toThrowError('Minimum temperature reached')
   })
+
+  describe ('Power saving mode', function(){
+
+    it('If power saving mode is on, the maximum temperature is 25 degrees',function(){
+      thermostat.powermode('on');
+      for(i = 0; i < 5; i++) {
+        thermostat.up();
+        }
+      expect(function(){ thermostat.up(); }).toThrowError('Maximum temperature reached')
+    });
+
+    it('If power saving mode is off, the maximum temperature is 32 degrees',function(){
+      thermostat.powermode('off');
+      for(i = 0; i < 12; i++) {
+      thermostat.up();
+        }
+      expect(function(){ thermostat.up(); }).toThrowError('Maximum temperature reached')
+    });
+  });
 });
