@@ -26,6 +26,11 @@ describe("Thermostat", function() {
 
   describe ('Power saving mode', function(){
 
+    it('power saving mode is on by default', function() {
+      expect(thermostat.powersaving).toBeTruthy
+      expect(thermostat.MAXIMUM_TEMPERATURE).toEqual(25);
+    })
+
     it('If power saving mode is on, the maximum temperature is 25 degrees',function(){
       thermostat.powermode('on');
       for(i = 0; i < 5; i++) {
@@ -40,6 +45,15 @@ describe("Thermostat", function() {
       thermostat.up();
         }
       expect(function(){ thermostat.up(); }).toThrowError('Maximum temperature reached')
+    });
+  });
+
+  describe ('reset button', function(){
+
+    it('resets the temperature to 20 degrees', function() {
+      thermostat.up()
+      thermostat.reset();
+      expect(thermostat.temperature).toEqual(20);
     });
   });
 });
