@@ -59,17 +59,21 @@ describe("Thermostat", function() {
 
   describe ('colours the display based on energy usage', function() {
     it('shows green when temperature is below 18 degrees', function() {
-      thermostat.temperature = 17
+      for(i = 0; i < 4; i++) {
+        thermostat.down();
+      }
       thermostat.displayColour()
       expect(thermostat.colour).toEqual('green')
     })
     it('shows yellow when temperature is below 25 degrees', function() {
-      thermostat.temperature = 24
       thermostat.displayColour()
       expect(thermostat.colour).toEqual('yellow')
     })
-    it('shows green when temperature is above 25 degrees', function() {
-      thermostat.temperature = 26
+    it('shows red when temperature is above 25 degrees', function() {
+      thermostat.powermode('off');
+      for(i = 0; i < 7; i++) {
+        thermostat.up();
+      }
       thermostat.displayColour()
       expect(thermostat.colour).toEqual('red')
     })
