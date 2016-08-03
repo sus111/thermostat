@@ -5,7 +5,6 @@ describe("Thermostat", function() {
     thermostat = new Thermostat();
   });
 
-
   it('has default temperature 20 degrees', function() {
     expect(thermostat.temperature).toEqual(20);
   });
@@ -18,9 +17,7 @@ describe("Thermostat", function() {
     expect(thermostat.temperature).toEqual(19);
   });
   it('has a minimum temperature of 10 degrees', function(){
-    for(i = 0; i < 10; i++) {
-      thermostat.down();
-    }
+    for(i = 0; i < 10; i++) {thermostat.down();}
     expect(function(){ thermostat.down(); }).toThrowError('Minimum temperature reached')
   })
 
@@ -28,28 +25,23 @@ describe("Thermostat", function() {
 
     it('power saving mode is on by default', function() {
       expect(thermostat.powersaving).toBeTruthy
-      expect(thermostat.MAXIMUM_TEMPERATURE).toEqual(25);
+      expect(thermostat.MAX_TEMPERATURE).toEqual(25);
     })
 
     it('If power saving mode is on, the maximum temperature is 25 degrees',function(){
-      thermostat.powermode('on');
-      for(i = 0; i < 5; i++) {
-        thermostat.up();
-        }
+      thermostat.powerSavingOn();
+      for(i = 0; i < 5; i++) {thermostat.up();}
       expect(function(){ thermostat.up(); }).toThrowError('Maximum temperature reached')
     });
 
     it('If power saving mode is off, the maximum temperature is 32 degrees',function(){
-      thermostat.powermode('off');
-      for(i = 0; i < 12; i++) {
-      thermostat.up();
-        }
+      thermostat.powerSavingOff();
+      for(i = 0; i < 12; i++) {thermostat.up();}
       expect(function(){ thermostat.up(); }).toThrowError('Maximum temperature reached')
     });
   });
 
   describe ('reset button', function(){
-
     it('resets the temperature to 20 degrees', function() {
       thermostat.up()
       thermostat.reset();
@@ -59,22 +51,18 @@ describe("Thermostat", function() {
 
   describe ('colours the display based on energy usage', function() {
     it('shows green when temperature is below 18 degrees', function() {
-      for(i = 0; i < 4; i++) {
-        thermostat.down();
-      }
-      thermostat.displayColour()
+      for(i = 0; i < 4; i++) {thermostat.down();}
+      thermostat.energyUsage()
       expect(thermostat.colour).toEqual('green')
     })
     it('shows yellow when temperature is below 25 degrees', function() {
-      thermostat.displayColour()
+      thermostat.energyUsage()
       expect(thermostat.colour).toEqual('yellow')
     })
     it('shows red when temperature is above 25 degrees', function() {
-      thermostat.powermode('off');
-      for(i = 0; i < 7; i++) {
-        thermostat.up();
-      }
-      thermostat.displayColour()
+      thermostat.powerSavingOff();
+      for(i = 0; i < 7; i++) {thermostat.up();}
+      thermostat.energyUsage()
       expect(thermostat.colour).toEqual('red')
     })
   })

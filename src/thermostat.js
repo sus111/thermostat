@@ -1,50 +1,52 @@
 function Thermostat() {
-  this.temperature = 20;
-  this.MINIMUM_TEMPERATURE = 10;
-  this.MAXIMUM_TEMPERATURE = 25;
-  this.GREEN_MAX = 18
-  this.YELLOW_MAX = 25
+  this.DEFAULT_TEMPERATURE = 20;
+  this.temperature = this.DEFAULT_TEMPERATURE;
+  this.MIN_TEMPERATURE = 10;
+  this.MAX_TEMPERATURE_POWERSAVERON = 25;
+  this.MAX_TEMPERATURE_POWERSAVEROFF = 32;
+  this.MAX_TEMPERATURE = this.MAX_TEMPERATURE_POWERSAVERON
+  this.YELLOW_ENERGY_MIN = 18;
   this.powersaving = true;
-  this.colour = "yellow"
+}
 
+Thermostat.prototype.currentTemperature = function() {
+  return this.temperature
 }
 
 Thermostat.prototype.up = function(){
-  if(this.temperature === this.MAXIMUM_TEMPERATURE) {
+  if(this.temperature === this.MAX_TEMPERATURE) {
     throw new Error('Maximum temperature reached');
   }
   this.temperature++;
 }
 
 Thermostat.prototype.down = function(){
-  if(this.temperature === this.MINIMUM_TEMPERATURE) {
+  if(this.temperature === this.MIN_TEMPERATURE) {
     throw new Error('Minimum temperature reached');
   }
   this.temperature--;
 }
 
-Thermostat.prototype.powermode = function(mode){
-  if(mode === 'off'){
-    this.MAXIMUM_TEMPERATURE = 32;
+Thermostat.prototype.powerSavingOff = function(){
+    this.MAX_TEMPERATURE = this.MAX_TEMPERATURE_POWERSAVEROFF;
     this.powersaving = false
-  } else {
-    this.MAXIMUM_TEMPERATURE = 25;
+}
+
+Thermostat.prototype.powerSavingOn = function(){
+    this.MAX_TEMPERATURE = this.MAX_TEMPERATURE_POWERSAVERON;
     this.powersaving = true
-  }
 }
 
 Thermostat.prototype.reset = function(){
-  this.temperature = 20
+  this.temperature = this.DEFAULT_TEMPERATURE
 }
 
-Thermostat.prototype.displayColour = function(){
-  if(this.temperature > this.GREEN_MAX && this.temperature < this.YELLOW_MAX) {
-    return this.colour = 'yellow'
+Thermostat.prototype.energyUsage = function(){
+  if(this.temperature < this.YELLOW_ENERGY_MIN) {
+    return this.colour = 'green';
   }
-  if(this.temperature < this.GREEN_MAX) {
-    return this.colour = 'green'
+  if(this.temperature >= this.YELLOW_ENERGY_MIN && this.temperature <= this.MAX_TEMPERATURE_POWERSAVERON) {
+    return this.colour = 'yellow';
   }
-  if(this.temperature > this.YELLOW_MAX) {
-    return this.colour = "red"
-  }
+    return this.colour = "red";
 }
