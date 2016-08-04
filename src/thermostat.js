@@ -1,52 +1,42 @@
-function Thermostat() {
-  this.DEFAULT_TEMPERATURE = 20;
-  this.temperature = this.DEFAULT_TEMPERATURE;
-  this.MIN_TEMPERATURE = 10;
-  this.MAX_TEMPERATURE_POWERSAVERON = 25;
-  this.MAX_TEMPERATURE_POWERSAVEROFF = 32;
-  this.MAX_TEMPERATURE = this.MAX_TEMPERATURE_POWERSAVERON
-  this.MEDIUM_ENERGY_MIN = 18;
-  this.powerSaving = true;
+function Thermostat(){
+  this.DEFAULT_TEMP = 20;
+  this.DEFAULT_MINIMUM = 10;
+  this.LOWER_MAX_TEMP = 25;
+  this.DEFAULT_MAXIMUM = this.LOWER_MAX_TEMP;
+  this.HIGHER_MAX_TEMP = 32;
+  this.powerSavingMode = true;
+  this.temperature = this.DEFAULT_TEMP;
 }
 
-Thermostat.prototype.currentTemperature = function() {
-  return this.temperature
-}
-
-Thermostat.prototype.up = function(){
-  if(this.temperature === this.MAX_TEMPERATURE) {
-    throw new Error('Maximum temperature reached');
+Thermostat.prototype.up = function() {
+  if(this.temperature === this.DEFAULT_MAXIMUM){
+    throw new Error('max temp reached');
   }
-  this.temperature++;
-}
-
-Thermostat.prototype.down = function(){
-  if(this.temperature === this.MIN_TEMPERATURE) {
-    throw new Error('Minimum temperature reached');
+  this.temperature += 1;
+};
+Thermostat.prototype.down = function() {
+  if(this.temperature === this.DEFAULT_MINIMUM){
+    throw new Error('too cold!');
   }
-  this.temperature--;
-}
-
-Thermostat.prototype.powerSavingOff = function(){
-    this.MAX_TEMPERATURE = this.MAX_TEMPERATURE_POWERSAVEROFF;
-    this.powerSaving = false
-}
-
-Thermostat.prototype.powerSavingOn = function(){
-    this.MAX_TEMPERATURE = this.MAX_TEMPERATURE_POWERSAVERON;
-    this.powerSaving = true
-}
-
-Thermostat.prototype.reset = function(){
-  this.temperature = this.DEFAULT_TEMPERATURE
-}
-
+  this.temperature -= 1;
+};
+Thermostat.prototype.powerSavingModeOff = function() {
+  this.powerSavingMode = false;
+  this.DEFAULT_MAXIMUM = this.HIGHER_MAX_TEMP;
+};
+Thermostat.prototype.powerSavingModeOn = function() {
+  this.powerSavingMode = true;
+  this.DEFAULT_MAXIMUM = this.LOWER_MAX_TEMP;
+};
+Thermostat.prototype.reset = function() {
+  this.temperature = this.DEFAULT_TEMP;
+};
 Thermostat.prototype.energyUsage = function(){
-  if(this.temperature < this.MEDIUM_ENERGY_MIN) {
-    return this.colour = 'low-usage';
+  if(this.temperature >= 18 && this.temperature <= 25 ){
+    return 'medium usage';
   }
-  if(this.temperature >= this.MEDIUM_ENERGY_MIN && this.temperature <= this.MAX_TEMPERATURE_POWERSAVERON) {
-    return this.colour = 'medium-usage';
+  if (this.temperature < 18 ) {
+    return 'low usage';
   }
-    return this.colour = 'high-usage';
-}
+  return 'high usage';
+};
