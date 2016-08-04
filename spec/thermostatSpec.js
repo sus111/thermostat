@@ -53,17 +53,17 @@ describe("Thermostat", function() {
     it('shows green when temperature is below 18 degrees', function() {
       for(i = 0; i < 4; i++) {thermostat.down();}
       thermostat.energyUsage()
-      expect(thermostat.colour).toEqual('green')
+      expect(thermostat.colour).toEqual('low-usage')
     })
     it('shows yellow when temperature is below 25 degrees', function() {
       thermostat.energyUsage()
-      expect(thermostat.colour).toEqual('yellow')
+      expect(thermostat.colour).toEqual('medium-usage')
     })
     it('shows red when temperature is above 25 degrees', function() {
       thermostat.powerSavingOff();
       for(i = 0; i < 7; i++) {thermostat.up();}
       thermostat.energyUsage()
-      expect(thermostat.colour).toEqual('red')
+      expect(thermostat.colour).toEqual('high-usage')
     })
   })
 });

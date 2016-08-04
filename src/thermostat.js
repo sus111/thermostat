@@ -5,8 +5,8 @@ function Thermostat() {
   this.MAX_TEMPERATURE_POWERSAVERON = 25;
   this.MAX_TEMPERATURE_POWERSAVEROFF = 32;
   this.MAX_TEMPERATURE = this.MAX_TEMPERATURE_POWERSAVERON
-  this.YELLOW_ENERGY_MIN = 18;
-  this.powersaving = true;
+  this.MEDIUM_ENERGY_MIN = 18;
+  this.powerSaving = true;
 }
 
 Thermostat.prototype.currentTemperature = function() {
@@ -29,12 +29,12 @@ Thermostat.prototype.down = function(){
 
 Thermostat.prototype.powerSavingOff = function(){
     this.MAX_TEMPERATURE = this.MAX_TEMPERATURE_POWERSAVEROFF;
-    this.powersaving = false
+    this.powerSaving = false
 }
 
 Thermostat.prototype.powerSavingOn = function(){
     this.MAX_TEMPERATURE = this.MAX_TEMPERATURE_POWERSAVERON;
-    this.powersaving = true
+    this.powerSaving = true
 }
 
 Thermostat.prototype.reset = function(){
@@ -42,11 +42,11 @@ Thermostat.prototype.reset = function(){
 }
 
 Thermostat.prototype.energyUsage = function(){
-  if(this.temperature < this.YELLOW_ENERGY_MIN) {
-    return this.colour = 'green';
+  if(this.temperature < this.MEDIUM_ENERGY_MIN) {
+    return this.colour = 'low-usage';
   }
-  if(this.temperature >= this.YELLOW_ENERGY_MIN && this.temperature <= this.MAX_TEMPERATURE_POWERSAVERON) {
-    return this.colour = 'yellow';
+  if(this.temperature >= this.MEDIUM_ENERGY_MIN && this.temperature <= this.MAX_TEMPERATURE_POWERSAVERON) {
+    return this.colour = 'medium-usage';
   }
-    return this.colour = "red";
+    return this.colour = 'high-usage';
 }
