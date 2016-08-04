@@ -1,0 +1,11 @@
+.low-usage {
+  background-color: lightgreen;
+}
+
+.medium-usage {
+  background-color: pink;
+}
+
+.high-usage {
+  background-color: hotpink;
+}
