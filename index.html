@@ -5,10 +5,18 @@
     <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body id='body'>
+      <div class="jumbotron">
+      <h1>CURRENT TEMPERATURE: <span id="current-temperature"></span></h1>
+          <select id="current-city">
+            <option value="london">London</option>
+            <option value="newyork">New York</option>
+            <option value="paris">Paris</option>
+            <option value="tokyo">Tokyo</option>
+          </select>
+</div>
     <section>
-      <section>
-          <h1>My house temperature: <span id="temperature"></span></h1>
-      </section>
+      <h1>TEMPERATURE IN HERE: <span id="temperature"></span></h1>
+    
       <p>
         <button id='temp-up'>+</button>
         <button id='temp-down'>-</button>
@@ -17,13 +25,7 @@
         <button id='powersaving-on'>PSM on</button>
         <button id='powersaving-off'>PSM off</button>
       </p>
-          <h1>Current temperature: <span id="current-temperature"></span></h1>
-          <select id="current-city">
-            <option value="london">London</option>
-            <option value="newyork">New York</option>
-            <option value="paris">Paris</option>
-            <option value="tokyo">Tokyo</option>
-          </select>
+          
     </section>
     <script src='src/thermostat.js'></script>
     <script src="jquery-3.1.0.js"></script>

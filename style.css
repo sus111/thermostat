@@ -9,3 +9,27 @@
 .high-usage {
   background-color: hotpink;
 }
+
+.jumbotron {
+    background-color: slategrey;
+    height: 200px;
+}
+
+body {
+    padding: none;
+}
+
+section {
+    padding: none;
+}
+
+h1 {
+  color: white;
+  font-family: helvetica;
+  font-weight: bold;
+  font-size: 80px;
+  margin-bottom: -140px;
+  text-align: center;
+  -webkit-text-stroke: 1px black;
+}
+

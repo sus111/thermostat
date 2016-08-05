@@ -2,7 +2,7 @@ $(document).ready(function(){
   var thermostat = new Thermostat();
     
    function updateTemperature() {
-    $('#temperature').text(thermostat.temperature);
+    $('#temperature').text(thermostat.temperature + "°C");
     $('#body').attr('class', thermostat.energyUsage());
   }    
     
@@ -20,7 +20,7 @@ $(document).ready(function(){
     var token = '&appid=044e356b671b8e64178e84aad3771111';
     var units = '&units=metric';
     $.get(url + token + units, function(data) {
-    $('#current-temperature').text(data.main.temp);
+    $('#current-temperature').text(Math.round(data.main.temp) + "°C");
     });
   }
 
@@ -53,11 +53,5 @@ $(document).ready(function(){
     updateTemperature();
   });
     
-    function changeTheme() {
-   var e = document.getElementById("themes");
-   var theme = e.options[e.selectedIndex].value;
-   document.getElementById("shelf").style.backgroundImage = "url(" + theme + ")";
-
-}
     
 });
