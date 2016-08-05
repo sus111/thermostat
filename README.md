@@ -1,1 +1,1 @@
-# Thermostat #
+# This is my thermostat #
