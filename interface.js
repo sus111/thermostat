@@ -1,5 +1,11 @@
 $(document).ready(function(){
   var thermostat = new Thermostat();
+    
+   function updateTemperature() {
+    $('#temperature').text(thermostat.temperature);
+    $('#body').attr('class', thermostat.energyUsage());
+  }    
+    
   updateTemperature();
 
   $('#current-city').change(function() {
@@ -18,10 +24,7 @@ $(document).ready(function(){
     });
   }
 
-  function updateTemperature() {
-    $('#temperature').text(thermostat.temperature);
-    $('#body').attr('class', thermostat.energyUsage());
-  }
+ 
 
   $('#temp-up').on('click', function(){
     thermostat.up();
@@ -49,4 +52,12 @@ $(document).ready(function(){
     $('#powersaving-status').text('off');
     updateTemperature();
   });
+    
+    function changeTheme() {
+   var e = document.getElementById("themes");
+   var theme = e.options[e.selectedIndex].value;
+   document.getElementById("shelf").style.backgroundImage = "url(" + theme + ")";
+
+}
+    
 });
